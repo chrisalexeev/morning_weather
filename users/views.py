@@ -22,7 +22,6 @@ def register(request):
     return render(request, 'users/register.html', {'form':form})
 
 @login_required
-@transaction.atomic
 def update_profile(request):
     if request.method == 'POST':
         u_form = UserUpdateForm(request.POST, instance=request.user)
@@ -30,14 +29,16 @@ def update_profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, _('Your profile was successfully updated!'))
+            messages.success(request, ('Your profile was successfully updated!'))
             return redirect('profile')
         else:
-            messages.error(request, _('Please correct the error below.'))
+            messages.error(request, ('Please correct the error below.'))
     else:
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'users/profile.html', {
+    
+    context = {
         'u_form': u_form,
         'p_form': p_form
-    })
+        }
+    return render(request, 'users/profile.html', context)
