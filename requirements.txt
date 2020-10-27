@@ -2,7 +2,7 @@ APScheduler==3.6.3
 beautifulsoup4==4.8.1
 bs4==0.0.1
 cycler==0.10.0
-Django==2.2.7
+Django==2.2.13
 django-cleanup==4.0.0
 django-crispy-forms==1.8.1
 django-localflavor==2.2
